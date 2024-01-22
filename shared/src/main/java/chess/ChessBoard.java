@@ -8,8 +8,10 @@ package chess;
  */
 public class ChessBoard {
 
+    private ChessPiece[][] chessBoard = new ChessPiece[8][8];
+
     public ChessBoard() {
-        
+
     }
 
     /**
@@ -19,7 +21,8 @@ public class ChessBoard {
      * @param piece    the piece to add
      */
     public void addPiece(ChessPosition position, ChessPiece piece) {
-        throw new RuntimeException("Not implemented");
+
+        chessBoard[position.getRow()][position.getColumn()] = piece;
     }
 
     /**
@@ -30,7 +33,7 @@ public class ChessBoard {
      * position
      */
     public ChessPiece getPiece(ChessPosition position) {
-        throw new RuntimeException("Not implemented");
+        return chessBoard[position.getColumn()][position.getColumn()];
     }
 
     /**
@@ -38,6 +41,31 @@ public class ChessBoard {
      * (How the game of chess normally starts)
      */
     public void resetBoard() {
-        throw new RuntimeException("Not implemented");
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                chessBoard[i][j] = null;
+            }
+        }
+
+        setupPiecesForColor(0, ChessGame.TeamColor.WHITE);
+        setupPiecesForColor(7, ChessGame.TeamColor.BLACK);
+    }
+
+    public void setupPiecesForColor(int row, ChessGame.TeamColor color){
+        chessBoard[row][0] = new Rook(color);
+        chessBoard[row][1] = new Knight(color);
+        chessBoard[row][2] = new Bishop(color);
+        chessBoard[row][3] = new Queen(color);
+        chessBoard[row][4] = new King(color);
+        chessBoard[row][5] = new Bishop(color);
+        chessBoard[row][6] = new Knight(color);
+        chessBoard[row][7] = new Rook(color);
+
+        //Setting up the paws
+        if(row == 1 || row == 6){
+            for(int j = 0; j < 8; j++){
+                chessBoard[row][j] = new Pawn(color);
+            }
+        }
     }
 }
