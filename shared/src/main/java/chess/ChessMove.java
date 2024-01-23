@@ -21,6 +21,12 @@ public class ChessMove {
         promotionPieceType = promotionPiece;
     }
 
+    public ChessMove(ChessPosition startPosition, ChessPosition endPosition) {
+        startPos = startPosition;
+        endPos = endPosition;
+        promotionPieceType = null;
+    }
+
     /**
      * @return ChessPosition of starting location
      */
